@@ -1,4 +1,4 @@
-package com.jordan.newsapp.domain.use_cases
+package com.example.news.domain.use_cases
 
 import com.example.news.domain.use_cases.api.GetCategoryArticles
 import com.example.news.domain.use_cases.api.GetTopArticles

@@ -13,7 +13,7 @@ import com.example.news.domain.use_cases.database.DeleteArticle
 import com.example.news.domain.use_cases.database.GetSavedArticles
 import com.example.news.domain.use_cases.database.SaveArticle
 import com.example.news.util.Constants.Companion.BASE_URL
-import com.jordan.newsapp.domain.use_cases.NewsUseCases
+import com.example.news.domain.use_cases.NewsUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
