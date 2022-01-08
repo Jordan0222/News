@@ -5,4 +5,5 @@ sealed class Screen(val route: String) {
     object ArticleScreen: Screen("article_screen")
     object CategoryNewsScreen: Screen("category_news_screen")
     object SearchNewsScreen: Screen("search_news_screen")
+    object SaveNewsScreen: Screen("save_news_screen")
 }
