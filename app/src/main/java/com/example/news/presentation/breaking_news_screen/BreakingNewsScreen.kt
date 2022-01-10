@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.news.presentation.components.ArticleItem
+import com.example.news.ui.spacing
 import com.example.news.util.Country
 import com.example.news.util.Screen
 
@@ -49,7 +50,9 @@ fun BreakingNewsScreen(
                         fontSize = 30.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier
-                            .padding(10.dp)
+                            .padding(
+                                MaterialTheme.spacing.small
+                            )
                     )
                     Spacer(modifier = Modifier.width(10.dp))
                     Row(

@@ -49,7 +49,7 @@ class ArticleDaoTest {
     }
 
     @Test
-    fun insertArticle() = runBlocking {
+    fun insertArticle() = runBlockingTest {
         withContext(Dispatchers.Main) {
             val article = Article(
                 "My name is Jordan",
