@@ -6,14 +6,7 @@ import com.example.news.data.local.ArticleDatabase
 import com.example.news.data.remote.NewsApi
 import com.example.news.data.repository.ArticleRepositoryImpl
 import com.example.news.domain.repository.ArticleRepository
-import com.example.news.domain.use_cases.api.GetCategoryArticles
-import com.example.news.domain.use_cases.api.GetTopArticles
-import com.example.news.domain.use_cases.api.SearchArticles
-import com.example.news.domain.use_cases.database.DeleteArticle
-import com.example.news.domain.use_cases.database.GetSavedArticles
-import com.example.news.domain.use_cases.database.SaveArticle
 import com.example.news.util.Constants.Companion.BASE_URL
-import com.example.news.domain.use_cases.NewsUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -63,18 +56,5 @@ object AppModule {
         db: ArticleDatabase
     ): ArticleRepository {
         return ArticleRepositoryImpl(api, db.dao)
-    }
-
-    @Provides
-    @Singleton
-    fun provideNewsUseCases(repository: ArticleRepository): NewsUseCases {
-        return NewsUseCases(
-            getTopArticles = GetTopArticles(repository),
-            getSavedArticles = GetSavedArticles(repository),
-            searchArticles = SearchArticles(repository),
-            saveArticle = SaveArticle(repository),
-            deleteArticle = DeleteArticle(repository),
-            getCategoryArticles = GetCategoryArticles(repository)
-        )
     }
 }

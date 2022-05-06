@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.FiberNew
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.Search
@@ -49,6 +50,11 @@ class MainActivity : ComponentActivity() {
                                     route = Screen.CategoryNewsScreen.route,
                                     icon = Icons.Default.Language
                                 ),
+                                /*BottomNavItem(
+                                    name = "珍藏",
+                                    route = Screen.SaveNewsScreen.route,
+                                    icon = Icons.Default.Bookmark
+                                ),*/
                                 BottomNavItem(
                                     name = "搜尋",
                                     route = Screen.SearchNewsScreen.route,
@@ -72,7 +78,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Navigation(navController: NavHostController) {
     NavHost(
-        navController = navController, 
+        navController = navController,
         startDestination = Screen.BreakingNewsScreen.route
     ) {
         composable(

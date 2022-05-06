@@ -54,7 +54,7 @@ fun BreakingNewsScreen(
                                 MaterialTheme.spacing.small
                             )
                     )
-                    Spacer(modifier = Modifier.width(10.dp))
+                    Spacer(modifier = Modifier.width(MaterialTheme.spacing.small))
                     Row(
                         modifier = Modifier
                             .clickable {

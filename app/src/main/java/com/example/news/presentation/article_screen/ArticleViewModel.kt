@@ -6,14 +6,14 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.news.domain.model.Article
-import com.example.news.domain.use_cases.NewsUseCases
+import com.example.news.domain.repository.ArticleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ArticleViewModel @Inject constructor(
-    private val newsUseCases: NewsUseCases,
+    private val repository: ArticleRepository,
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
@@ -40,7 +40,7 @@ class ArticleViewModel @Inject constructor(
 
     fun saveNews() {
         viewModelScope.launch {
-            newsUseCases.saveArticle(
+            repository.insertArticle(
                 Article(
                     url = url,
                     urlToImage = urlToImage,

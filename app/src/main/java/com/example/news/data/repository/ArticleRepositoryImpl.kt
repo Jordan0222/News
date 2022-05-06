@@ -55,7 +55,7 @@ class ArticleRepositoryImpl(
         country: String,
         category: String
     ): Flow<Resource<List<Article>>> = flow {
-        emit(Resource.Loading<List<Article>>())
+        emit(Resource.Loading())
 
         try {
             val news = api.getCategoryNews(countryCode = country, category = category)

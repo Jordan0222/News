@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.news.domain.use_cases.NewsUseCases
+import com.example.news.domain.repository.ArticleRepository
 import com.example.news.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchNewsViewModel @Inject constructor(
-    private val newsUseCases: NewsUseCases
+    private val repository: ArticleRepository
 ): ViewModel() {
 
     private val _searchQuery = mutableStateOf(
@@ -52,7 +52,7 @@ class SearchNewsViewModel @Inject constructor(
                 searchJob?.cancel()
                 searchJob = viewModelScope.launch {
                     delay(500L)
-                    newsUseCases.searchArticles(searchQuery.value.text)
+                   repository.searchArticle(searchQuery.value.text)
                         .onEach { result ->
                             when (result) {
                                 is Resource.Success -> {

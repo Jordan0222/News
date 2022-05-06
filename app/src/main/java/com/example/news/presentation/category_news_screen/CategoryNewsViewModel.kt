@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.news.domain.use_cases.NewsUseCases
+import com.example.news.domain.repository.ArticleRepository
 import com.example.news.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CategoryNewsViewModel @Inject constructor(
-    private val newsUseCases: NewsUseCases
+    private val repository: ArticleRepository
 ): ViewModel(){
 
     private val _newsState = mutableStateOf(CategoryNewsState())
@@ -63,7 +63,7 @@ class CategoryNewsViewModel @Inject constructor(
     private fun getCategoryNews(countryAbbrev: String, categoryEnglish: String) {
         getCategoryArticlesJob?.cancel()
         getCategoryArticlesJob = viewModelScope.launch {
-            newsUseCases.getCategoryArticles(countryAbbrev, categoryEnglish)
+            repository.getCategoryArticles(countryAbbrev, categoryEnglish)
                 .onEach { result ->
                     when (result) {
                         is Resource.Success -> {
