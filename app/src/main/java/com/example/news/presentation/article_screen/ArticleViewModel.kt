@@ -20,6 +20,9 @@ class ArticleViewModel @Inject constructor(
     private val _state = mutableStateOf(WebViewState())
     val state: State<WebViewState> = _state
 
+    private val _urlState = mutableStateOf("")
+    val urlState: State<String> = _urlState
+
     private var url: String = ""
     private var urlToImage: String = ""
     private var title: String = ""
@@ -27,6 +30,8 @@ class ArticleViewModel @Inject constructor(
 
     init {
         url = savedStateHandle.get<String>("url").toString()
+        _urlState.value = url
+
         urlToImage = savedStateHandle.get<String>("urlToImage").toString()
         title = savedStateHandle.get<String>("title").toString()
         description = savedStateHandle.get<String>("description").toString()

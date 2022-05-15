@@ -4,9 +4,12 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.webkit.*
+import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
+import kotlinx.coroutines.launch
 
 @Composable
 fun CustomWebView(

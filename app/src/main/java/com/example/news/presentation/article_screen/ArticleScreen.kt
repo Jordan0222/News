@@ -16,10 +16,10 @@ import com.example.news.presentation.article_screen.components.CustomWebView
 @Composable
 fun ArticleScreen(
     modifier: Modifier = Modifier,
-    url: String,
     viewModel: ArticleViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
+    val url = viewModel.urlState.value
 
     Box(
         modifier = Modifier.fillMaxSize()

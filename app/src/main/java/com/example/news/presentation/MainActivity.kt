@@ -108,8 +108,8 @@ fun Navigation(navController: NavHostController) {
                     nullable = true
                 }
             )
-        ) { entry ->
-            entry.arguments?.getString("url")?.let { ArticleScreen(url = it) }
+        ) {
+            ArticleScreen()
         }
     }
 }
