@@ -3,10 +3,12 @@ package com.example.news.presentation.breaking_news_screen
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
@@ -20,6 +22,7 @@ import com.example.news.presentation.components.ArticleItem
 import com.example.news.ui.spacing
 import com.example.news.util.Country
 import com.example.news.util.Screen
+import kotlinx.coroutines.launch
 
 @Composable
 fun BreakingNewsScreen(
@@ -30,6 +33,9 @@ fun BreakingNewsScreen(
     val newsState = viewModel.newsState.value
     val scaffoldState = rememberScaffoldState()
     val countryList = Country.getAllCountriesName()
+
+    val listState = rememberLazyListState()
+    val scope = rememberCoroutineScope()
 
     Scaffold(
         scaffoldState = scaffoldState
@@ -77,10 +83,14 @@ fun BreakingNewsScreen(
                             }
                         ) {
                             countryList.forEach { country ->
-                                DropdownMenuItem(onClick = {
-                                    viewModel.onEvent(BreakingNewsEvent.SpinnerClose)
-                                    viewModel.onEvent(BreakingNewsEvent.CountryAbbrev(Country.getCountryAbbrev(country)))
-                                }
+                                DropdownMenuItem(
+                                    onClick = {
+                                        viewModel.onEvent(BreakingNewsEvent.SpinnerClose)
+                                        viewModel.onEvent(BreakingNewsEvent.CountryAbbrev(Country.getCountryAbbrev(country)))
+                                        scope.launch {
+                                            listState.animateScrollToItem(0)
+                                        }
+                                    }
                                 ) {
                                     Text(
                                         text = country,
@@ -92,7 +102,10 @@ fun BreakingNewsScreen(
                     }
                 }
                 Spacer(modifier = Modifier.height(10.dp))
-                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                LazyColumn(
+                    state = listState,
+                    modifier = Modifier.fillMaxSize()
+                ) {
                     items(newsState.articleItems.size) { i ->
                         val article = newsState.articleItems[i]
                         if (i > 0) {
