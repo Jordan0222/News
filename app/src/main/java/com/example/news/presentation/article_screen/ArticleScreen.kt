@@ -27,6 +27,15 @@ fun ArticleScreen(
         Column(
             modifier = modifier.fillMaxSize()
         ) {
+            if (state.webViewProgress != 100) {
+                LinearProgressIndicator(
+                    progress = state.webViewProgress * 1.0F / 100F,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(5.dp),
+                    color = Color.Green
+                )
+            }
             CustomWebView(
                 modifier = Modifier.fillMaxSize(),
                 url = url,
@@ -51,16 +60,6 @@ fun ArticleScreen(
                         cacheMode = WebSettings.LOAD_NO_CACHE
                     }
                 }
-            )
-        }
-        if (state.webViewProgress != 100) {
-            LinearProgressIndicator(
-                progress = state.webViewProgress * 1.0F / 100F,
-                modifier = Modifier
-                    .width(150.dp)
-                    .height(15.dp)
-                    .align(Alignment.Center),
-                color = Color.Green
             )
         }
     }
