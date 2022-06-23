@@ -9,15 +9,9 @@ import com.example.news.data.local.ArticleDao
 import com.example.news.data.local.ArticleDatabase
 import com.example.news.domain.model.Article
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
-import kotlinx.coroutines.test.setMain
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.test.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -32,15 +26,12 @@ class ArticleDaoTest {
     private lateinit var database: ArticleDatabase
     private lateinit var dao: ArticleDao
 
-    private val testDispatcher = TestCoroutineDispatcher()
-
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setUp() {
-        Dispatchers.setMain(testDispatcher)
-
+        // inMemoryDatabaseBuilder: only safe in test
         database = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
             ArticleDatabase::class.java
@@ -49,8 +40,8 @@ class ArticleDaoTest {
     }
 
     @Test
-    fun insertArticle() = runBlockingTest {
-        withContext(Dispatchers.Main) {
+    fun insertArticle() = runTest {
+        launch {
             val article = Article(
                 "My name is Jordan",
                 "Introduce",
@@ -67,8 +58,8 @@ class ArticleDaoTest {
     }
 
     @Test
-    fun deleteArticle() = runBlockingTest {
-        withContext(Dispatchers.Main) {
+    fun deleteArticle() = runTest {
+        launch {
             val article = Article(
                 "My name is Jordan",
                 "Introduce",
@@ -88,8 +79,6 @@ class ArticleDaoTest {
     @After
     fun tearDown() {
         database.close()
-
         Dispatchers.resetMain()
-        testDispatcher.cleanupTestCoroutines()
     }
 }

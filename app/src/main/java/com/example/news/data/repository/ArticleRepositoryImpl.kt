@@ -7,6 +7,7 @@ import com.example.news.domain.repository.ArticleRepository
 import com.example.news.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import retrofit2.HttpException
 import java.io.IOException
 
