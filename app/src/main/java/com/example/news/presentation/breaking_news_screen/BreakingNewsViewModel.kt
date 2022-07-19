@@ -1,5 +1,6 @@
 package com.example.news.presentation.breaking_news_screen
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -17,6 +18,8 @@ import javax.inject.Inject
 class BreakingNewsViewModel @Inject constructor(
     private val repository: ArticleRepository
 ): ViewModel() {
+
+    private val TAG = "BreakingNews"
 
     private val _newsState = mutableStateOf(BreakingNewsState())
     val newsState: State<BreakingNewsState> = _newsState
@@ -53,6 +56,7 @@ class BreakingNewsViewModel @Inject constructor(
         getArticlesJob = viewModelScope.launch {
             repository.getTopArticles(countryAbbrev)
                 .onEach { result ->
+                    Log.d(TAG, "getNews: ${Thread.currentThread().name}")
                     when (result) {
                         is Resource.Success -> {
                             _newsState.value = newsState.value.copy(

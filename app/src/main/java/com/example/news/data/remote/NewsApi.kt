@@ -1,11 +1,14 @@
 package com.example.news.data.remote
 
+import com.example.news.BuildConfig
 import com.example.news.data.remote.dto.NewsDto
 import com.example.news.util.Constants.Companion.API_KEY
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NewsApi {
+
+    // BuildConfig.API_KEY
 
     @GET("/v2/top-headlines")
     suspend fun getBreakingNews(
