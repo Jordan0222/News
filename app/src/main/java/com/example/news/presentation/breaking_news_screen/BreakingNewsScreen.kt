@@ -29,7 +29,6 @@ fun BreakingNewsScreen(
     navController: NavController,
     viewModel: BreakingNewsViewModel = hiltViewModel()
 ) {
-
     val newsState = viewModel.newsState.value
     val scaffoldState = rememberScaffoldState()
     val countryList = Country.getAllCountriesName()
